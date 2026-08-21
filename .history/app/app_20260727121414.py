@@ -353,7 +353,7 @@ if predict:
 
     if prediction == 1:
 
-     st.markdown(
+    st.markdown(
         """
         <div class="result-pass">
         ✅ STUDENT IS LIKELY TO PASS

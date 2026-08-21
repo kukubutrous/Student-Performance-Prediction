@@ -353,7 +353,7 @@ if predict:
 
     if prediction == 1:
 
-     st.markdown(
+    st.markdown(
         """
         <div class="result-pass">
         ✅ STUDENT IS LIKELY TO PASS
@@ -445,7 +445,7 @@ if predict:
     for item in recommendations:
         st.write(f"✓ {item}")
 
-    else:
+               else:
 
        fail_probability = 100 - pass_probability
 

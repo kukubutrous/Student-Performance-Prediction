@@ -353,207 +353,75 @@ if predict:
 
     if prediction == 1:
 
-     st.markdown(
-        """
-        <div class="result-pass">
-        ✅ STUDENT IS LIKELY TO PASS
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    st.success(
-        f"Probability of Passing: {pass_probability:.2f}%"
-    )
-
-    st.progress(pass_probability / 100)
-
-    st.markdown("### 🌟 Strengths Identified")
-
-    strengths = []
-
-    if failures == 0:
-        strengths.append("No previous academic failures")
-
-    elif failures == 1:
-        strengths.append("Only one previous academic failure")
-
-    if absences <= 5:
-        strengths.append("Excellent class attendance")
-
-    elif absences <= 10:
-        strengths.append("Acceptable attendance")
-
-    if studytime >= 3:
-        strengths.append("Adequate weekly study time")
-
-    if famsup == "yes":
-        strengths.append("Receives family educational support")
-
-    if schoolsup == "yes":
-        strengths.append("Receives school educational support")
-
-    if internet == "yes":
-        strengths.append("Has internet access for learning")
-
-    if higher == "yes":
-        strengths.append("Aspires to pursue higher education")
-
-    if health >= 4:
-        strengths.append("Good health condition")
-
-    if activities == "yes":
-        strengths.append("Participates in extracurricular activities")
-
-    if goout <= 3:
-        strengths.append("Balanced social life")
-
-    if Walc <= 2 and Dalc <= 2:
-        strengths.append("Low alcohol consumption")
-
-    if len(strengths) > 0:
-
-        st.info(
-            "The following characteristics positively influenced the prediction:"
+        st.markdown(
+            """
+            <div class="result-pass">
+            ✅ STUDENT IS LIKELY TO PASS
+            </div>
+            """,
+            unsafe_allow_html=True
         )
 
-        for item in strengths:
-            st.write(f"✓ {item}")
+        st.success(
+            f"Probability of Passing: {pass_probability:.2f}%"
+        )
+
+        st.progress(pass_probability / 100)
+
+        st.markdown("### 📌 Interpretation")
+
+        if pass_probability >= 90:
+
+            st.info("""
+The model predicts that the student has an excellent chance of passing.
+""")
+
+        elif pass_probability >= 75:
+
+            st.info("""
+The student has a high probability of passing.
+""")
+
+        else:
+
+            st.info("""
+The student is predicted to pass but with moderate confidence.
+""")
 
     else:
 
-        st.info(
-            "The prediction is based on the combined influence of several positive characteristics."
+        fail_probability = 100 - pass_probability
+
+        st.markdown(
+            """
+            <div class="result-fail">
+            ❌ STUDENT IS LIKELY TO FAIL
+            </div>
+            """,
+            unsafe_allow_html=True
         )
 
-    st.markdown("### 📚 Recommendation")
-
-    recommendations = []
-
-    if studytime < 4:
-        recommendations.append("Increase study time for even better academic performance.")
-
-    if absences > 5:
-        recommendations.append("Reduce class absenteeism.")
-
-    if goout > 3:
-        recommendations.append("Maintain a better balance between social life and academics.")
-
-    if len(recommendations) == 0:
-        recommendations.append("Maintain your current academic habits.")
-
-    for item in recommendations:
-        st.write(f"✓ {item}")
-
-    else:
-
-       fail_probability = 100 - pass_probability
-
-    st.markdown(
-        """
-        <div class="result-fail">
-        ❌ STUDENT IS LIKELY TO FAIL
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    st.error(f"Probability of Failing: {fail_probability:.2f}%")
-
-    st.progress(fail_probability / 100)
-
-    st.markdown("### 📌 Possible Factors Behind This Prediction")
-
-    reasons = []
-
-    if absences >= 10:
-        reasons.append(f"High number of absences ({absences})")
-
-    if failures >= 2:
-        reasons.append(f"{failures} previous academic failures")
-
-    if studytime <= 2:
-        reasons.append(f"Low weekly study time ({studytime})")
-
-    if higher == "no":
-        reasons.append("Student is not planning to pursue higher education")
-
-    if schoolsup == "no":
-        reasons.append("No school educational support")
-
-    if famsup == "no":
-        reasons.append("No family educational support")
-
-    if Dalc >= 4:
-        reasons.append(f"High workday alcohol consumption ({Dalc})")
-
-    if Walc >= 4:
-        reasons.append(f"High weekend alcohol consumption ({Walc})")
-
-    if goout >= 4:
-        reasons.append(f"Frequently goes out with friends ({goout})")
-
-    if internet == "no":
-        reasons.append("No internet access at home")
-
-    if health <= 2:
-        reasons.append(f"Poor health status ({health})")
-
-    if traveltime >= 3:
-        reasons.append(f"Long travel time to school ({traveltime})")
-
-    if reasons:
-
-        st.warning(
-            "The following student characteristics may have contributed to the prediction:"
+        st.error(
+            f"Probability of Failing: {fail_probability:.2f}%"
         )
 
-        for reason in reasons:
-            st.write(f"• {reason}")
+        st.progress(fail_probability / 100)
 
-    else:
+        st.warning("""
+The student appears to be at risk of failing.
 
-        st.info(
-            "The prediction is based on the combined influence of multiple factors. "
-            "No single feature strongly influenced the result."
-        )
+Possible reasons include:
 
-    st.markdown("### 📚 Recommendation")
+• Too many absences
 
-    recommendations = []
+• Previous failures
 
-    if absences >= 10:
-        recommendations.append("Reduce absenteeism by attending classes regularly.")
+• Low study time
 
-    if failures >= 2:
-        recommendations.append("Provide academic mentoring and remedial support.")
+• Weak support system
 
-    if studytime <= 2:
-        recommendations.append("Increase weekly study time.")
-
-    if higher == "no":
-        recommendations.append("Encourage the student to set long-term educational goals.")
-
-    if schoolsup == "no":
-        recommendations.append("Seek additional academic support from the school.")
-
-    if famsup == "no":
-        recommendations.append("Encourage family involvement in academic progress.")
-
-    if Dalc >= 4 or Walc >= 4:
-        recommendations.append("Reduce alcohol consumption and adopt healthier habits.")
-
-    if goout >= 4:
-        recommendations.append("Balance social activities with study time.")
-
-    if internet == "no":
-        recommendations.append("Improve access to online learning resources.")
-
-    if len(recommendations) == 0:
-        recommendations.append("Continue monitoring academic performance closely.")
-
-    for item in recommendations:
-        st.write(f"✓ {item}")
+• Poor lifestyle habits
+""")
 
     st.divider()
 

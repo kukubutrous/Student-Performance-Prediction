@@ -353,97 +353,46 @@ if predict:
 
     if prediction == 1:
 
-     st.markdown(
-        """
-        <div class="result-pass">
-        ✅ STUDENT IS LIKELY TO PASS
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+        st.markdown("### 🌟 Strengths Identified")
 
-    st.success(
-        f"Probability of Passing: {pass_probability:.2f}%"
-    )
+strengths = []
 
-    st.progress(pass_probability / 100)
+if failures == 0:
+    strengths.append("No previous academic failures")
 
-    st.markdown("### 🌟 Strengths Identified")
+if absences <= 5:
+    strengths.append("Good class attendance")
 
-    strengths = []
+if studytime >= 3:
+    strengths.append("Adequate study time")
 
-    if failures == 0:
-        strengths.append("No previous academic failures")
+if famsup == "yes":
+    strengths.append("Receives family educational support")
 
-    elif failures == 1:
-        strengths.append("Only one previous academic failure")
+if schoolsup == "yes":
+    strengths.append("Receives school educational support")
 
-    if absences <= 5:
-        strengths.append("Excellent class attendance")
+if internet == "yes":
+    strengths.append("Has internet access for learning")
 
-    elif absences <= 10:
-        strengths.append("Acceptable attendance")
+if higher == "yes":
+    strengths.append("Plans to pursue higher education")
 
-    if studytime >= 3:
-        strengths.append("Adequate weekly study time")
+if health >= 4:
+    strengths.append("Good health status")
 
-    if famsup == "yes":
-        strengths.append("Receives family educational support")
+if activities == "yes":
+    strengths.append("Participates in extracurricular activities")
 
-    if schoolsup == "yes":
-        strengths.append("Receives school educational support")
-
-    if internet == "yes":
-        strengths.append("Has internet access for learning")
-
-    if higher == "yes":
-        strengths.append("Aspires to pursue higher education")
-
-    if health >= 4:
-        strengths.append("Good health condition")
-
-    if activities == "yes":
-        strengths.append("Participates in extracurricular activities")
-
-    if goout <= 3:
-        strengths.append("Balanced social life")
-
-    if Walc <= 2 and Dalc <= 2:
-        strengths.append("Low alcohol consumption")
-
-    if len(strengths) > 0:
-
-        st.info(
-            "The following characteristics positively influenced the prediction:"
-        )
-
-        for item in strengths:
-            st.write(f"✓ {item}")
+if strengths:
+    for item in strengths:
+        st.write(f"✓ {item}")
 
     else:
 
-        st.info(
-            "The prediction is based on the combined influence of several positive characteristics."
-        )
-
-    st.markdown("### 📚 Recommendation")
-
-    recommendations = []
-
-    if studytime < 4:
-        recommendations.append("Increase study time for even better academic performance.")
-
-    if absences > 5:
-        recommendations.append("Reduce class absenteeism.")
-
-    if goout > 3:
-        recommendations.append("Maintain a better balance between social life and academics.")
-
-    if len(recommendations) == 0:
-        recommendations.append("Maintain your current academic habits.")
-
-    for item in recommendations:
-        st.write(f"✓ {item}")
+            st.info("""
+The student is predicted to pass but with moderate confidence.
+""")
 
     else:
 
